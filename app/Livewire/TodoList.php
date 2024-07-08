@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Todo;
+use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -27,7 +28,12 @@ class TodoList extends Component
     }
     
     public function destroy(Todo $todo) {
-        $todo->delete();
+        try {
+            $todo->delete();
+        } catch(Exception $e) {
+
+        }
+
     }
 
     public function render()
