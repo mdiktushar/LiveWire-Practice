@@ -26,14 +26,24 @@ class TodoList extends Component
         // flash message
         session()->flash('success', 'Saved');
     }
-    
-    public function destroy(Todo $todo) {
+
+    public function toggleComplete(Todo $todo)
+    {
         try {
-            $todo->delete();
-        } catch(Exception $e) {
+            $todo->compleated = !$todo->compleated;
+            $todo->save();
+        } catch (Exception $e) {
 
         }
+    }
 
+    public function destroy(Todo $todo)
+    {
+        try {
+            $todo->delete();
+        } catch (Exception $e) {
+
+        }
     }
 
     public function render()
