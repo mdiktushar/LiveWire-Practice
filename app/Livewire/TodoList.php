@@ -11,7 +11,7 @@ use Livewire\WithPagination;
 class TodoList extends Component
 {
     use WithPagination;
-    public $name, $search;
+    public $name, $search, $editId, $editName;
 
     public function create()
     {
@@ -35,6 +35,31 @@ class TodoList extends Component
         } catch (Exception $e) {
 
         }
+    }
+
+    public function edit(Todo $todo)
+    {
+        $this->editId = $todo->id;
+        $this->editName = $todo->name;
+    }
+
+
+    public function update(Todo $todo)
+    {
+        try {
+            $todo->name = $this->editName;
+            $todo->save();
+            $this->editCancle($todo);
+        } catch (Exception $e) {
+
+        }
+
+    }
+
+    public function editCancle(Todo $todo)
+    {
+        $this->editId = null;
+        $this->editName = null;
     }
 
     public function destroy(Todo $todo)
