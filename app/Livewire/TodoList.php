@@ -25,6 +25,10 @@ class TodoList extends Component
         // flash message
         session()->flash('success', 'Saved');
     }
+    
+    public function destroy(Todo $todo) {
+        $todo->delete();
+    }
 
     public function render()
     {
